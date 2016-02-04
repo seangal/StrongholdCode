@@ -22,4 +22,6 @@ public class RobotMap {
 	public static final int rightVictor2 = 3;
 	
 	public static final int ballVictor = 9;
+	
+	public static final double maxSpeed = 0.5;
 }

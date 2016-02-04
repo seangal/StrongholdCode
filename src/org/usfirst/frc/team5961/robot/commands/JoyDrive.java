@@ -2,6 +2,8 @@ package org.usfirst.frc.team5961.robot.commands;
 
 import static org.usfirst.frc.team5961.robot.Robot.driveTrain;
 import static org.usfirst.frc.team5961.robot.Robot.oi;
+import static org.usfirst.frc.team5961.robot.Robot.cameraController;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -24,9 +26,14 @@ public class JoyDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double r = (-oi.getDriverY() + oi.getDriverX());
-    	double l = (-oi.getDriverY() - oi.getDriverX());
+    	double r = oi.getDriverR();
+    	double l = oi.getDriverL();
     	driveTrain.drive(r,l);
+    	if(r+l>=0){
+    		cameraController.forward();
+    	}else{
+    		cameraController.back();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

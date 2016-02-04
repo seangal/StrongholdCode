@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5961.robot;
 
+import static org.usfirst.frc.team5961.robot.Robot.oi;
+
 import org.usfirst.frc.team5961.robot.commands.Eat;
 import org.usfirst.frc.team5961.robot.commands.ThrowBall;
 
@@ -32,6 +34,23 @@ public class OI {
 	}
 	public double getDriverX() {
 		return driverJoystick.getX();
+	}
+	public double getDriverR(){
+		double r = (-oi.getDriverY() + oi.getDriverX())*RobotMap.maxSpeed;
+		if (r>RobotMap.maxSpeed){
+			return RobotMap.maxSpeed;
+		}else{
+			return r;
+		}
+		
+	}
+	public double getDriverL(){
+		double l = (-oi.getDriverY() - oi.getDriverX())*RobotMap.maxSpeed;
+		if (l>RobotMap.maxSpeed){
+			return RobotMap.maxSpeed;
+		}else{
+			return l;
+		}
 	}
 }
 
