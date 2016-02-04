@@ -3,6 +3,7 @@ package org.usfirst.frc.team5961.robot;
 
 import org.usfirst.frc.team5961.robot.commands.JoyDrive;
 import org.usfirst.frc.team5961.robot.subsystems.BallEater;
+import org.usfirst.frc.team5961.robot.subsystems.CameraController;
 import org.usfirst.frc.team5961.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	static public final DriveTrain driveTrain = new DriveTrain(RobotMap.leftVictor1,RobotMap.leftVictor2,RobotMap.rightVictor1,RobotMap.rightVictor2);
 	static public final BallEater ballEater = new BallEater(RobotMap.ballVictor);
+	static public final CameraController cameraController = new CameraController("cam0", "cam1");
     Command autonomousCommand;
     SendableChooser chooser;
 
