@@ -5,6 +5,7 @@ package org.usfirst.frc.team5961.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import static org.usfirst.frc.team5961.robot.Robot.oi;
 import static org.usfirst.frc.team5961.robot.Robot.driveTrain;
+//import static org.usfirst.frc.team5961.robot.Robot.cameraController;;
 /**
  *
  */
@@ -24,6 +25,7 @@ public class Forward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	//cameraController.forward();
     }
 
     // Called repeatedly when this Command is scheduled to run

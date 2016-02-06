@@ -3,6 +3,7 @@ package org.usfirst.frc.team5961.robot;
 import static org.usfirst.frc.team5961.robot.Robot.oi;
 
 import org.usfirst.frc.team5961.robot.commands.Eat;
+import org.usfirst.frc.team5961.robot.commands.StopAndHoldEater;
 import org.usfirst.frc.team5961.robot.commands.ThrowBall;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -21,19 +22,17 @@ public class OI {
 	public OI(){
 		Button eatButton = new JoystickButton(driverJoystick,eatPort);
 		Button throwButton = new JoystickButton(driverJoystick,throwPort);
-		eatButton.whenPressed(eat());
-		throwButton.whenPressed(new ThrowBall());
-	}
-	Command eat(){
-		System.out.println("eat");
-		return new Eat();
+		Button stopButton = new JoystickButton(driverJoystick, 3);
+		stopButton.whenPressed(new StopAndHoldEater());
+		eatButton.whenPressed(new Eat());
+		throwButton.whileHeld(new ThrowBall());
 	}
 	
 	public double getDriverY() {
 		return driverJoystick.getY();
 	}
 	public double getDriverX() {
-		return driverJoystick.getX();
+		return driverJoystick.getZ();
 	}
 	public double getDriverR(){
 		double r = (-oi.getDriverY() + oi.getDriverX())*RobotMap.maxSpeed;

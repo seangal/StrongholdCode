@@ -10,12 +10,12 @@ public class ThrowBall extends Command {
 
     public ThrowBall() {
     	 requires(ballEater);
-    	 setTimeout(2);
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+   	 setTimeout(2); //should be here, not in constructor :)
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +30,7 @@ public class ThrowBall extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	ballEater.stop();
+    	ballEater.hold();
     }
 
     // Called when another command which requires one or more of the same

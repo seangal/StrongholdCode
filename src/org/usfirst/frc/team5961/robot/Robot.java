@@ -24,8 +24,8 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	static public final DriveTrain driveTrain = new DriveTrain(RobotMap.leftVictor1,RobotMap.leftVictor2,RobotMap.rightVictor1,RobotMap.rightVictor2);
-	static public final BallEater ballEater = new BallEater(RobotMap.ballVictor);
-	static public final CameraController cameraController = new CameraController("cam0", "cam1");
+	static public final BallEater ballEater = new BallEater(RobotMap.ballVictor,RobotMap.limitPort);
+	//static public final CameraController cameraController = new CameraController("cam0", "cam1");
     Command autonomousCommand;
     SendableChooser chooser;
 
@@ -37,7 +37,11 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addObject("Drive", new JoyDrive());
+        
         SmartDashboard.putData("Auto mode", chooser);
+        SmartDashboard.putNumber("eatSpeed", RobotMap.eatSpeed);
+    	SmartDashboard.putNumber("throwSpeed", RobotMap.throwSpeed);
+    	SmartDashboard.putNumber("holdSpeed",RobotMap.holdSpeed);
     }
 	
 	/**

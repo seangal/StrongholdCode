@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopEat extends Command {
+public class StopAndHoldEater extends Command {
 
-    public StopEat() {
+    public StopAndHoldEater() {
             // Use requires() here to declare subsystem dependencies
             requires(ballEater);
         }
@@ -20,7 +20,11 @@ public class StopEat extends Command {
 
         // Called repeatedly when this Command is scheduled to run
         protected void execute() {
-        	ballEater.stop();
+        	if(ballEater.haveBall()){
+        		ballEater.hold();
+        	}else{
+        		ballEater.stop();
+        	}
         }
 
         // Make this return true when this Command no longer needs to run execute()
