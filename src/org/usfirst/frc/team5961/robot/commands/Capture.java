@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5961.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-//import static org.usfirst.frc.team5961.robot.Robot.cameraController;
+import static org.usfirst.frc.team5961.robot.Robot.cameraController;;
 /**
  *
  */
@@ -9,7 +9,7 @@ public class Capture extends Command {
 
     public Capture() {
         // Use requires() here to declare subsystem dependencies
-        //requires(cameraController);
+        requires(cameraController);
     }
 
     // Called just before this Command runs the first time
@@ -18,7 +18,7 @@ public class Capture extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//cameraController.grab();
+    	cameraController.grab();
     }
 
     // Make this return true when this Command no longer needs to run execute()

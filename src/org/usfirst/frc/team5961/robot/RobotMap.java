@@ -26,7 +26,7 @@ public class RobotMap {
 	public static final int limitPort = 0;
 	
 	public static final double maxSpeed = 0.5;
-	public static final double eatSpeed = 0.45;
-	public static final double throwSpeed = 0.5;
+	public static final double eatSpeed = 0.35;
+	public static final double throwSpeed = 0.6;
 	public static final double holdSpeed = 0.2;
 }
