@@ -1,9 +1,6 @@
 package org.usfirst.frc.team5961.robot.commands;
 
-
-
 import edu.wpi.first.wpilibj.command.Command;
-import static org.usfirst.frc.team5961.robot.Robot.oi;
 import static org.usfirst.frc.team5961.robot.Robot.driveTrain;
 //import static org.usfirst.frc.team5961.robot.Robot.cameraController;;
 /**
@@ -11,35 +8,27 @@ import static org.usfirst.frc.team5961.robot.Robot.driveTrain;
  */
 public class Forward extends Command {
 	double speed;
-    public Forward() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-		requires(driveTrain);
-		speed = 0;
-    }
+	double time;
     
-    public Forward(double speed2) {
-		this();
+    public Forward(double speed2, double time2) {
+    	requires(driveTrain);
 		this.speed = speed2;
+		this.time = time2;
 	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//cameraController.forward();
+    	setTimeout(time);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (speed != 0)
-			driveTrain.forward(speed);
-		else {
-			driveTrain.forward(oi.getDriverY());
-		}
+		driveTrain.forward(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

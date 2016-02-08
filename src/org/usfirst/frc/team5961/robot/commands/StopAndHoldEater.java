@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5961.robot.commands;
 
 import static org.usfirst.frc.team5961.robot.Robot.ballEater;
-import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -23,7 +22,6 @@ public class StopAndHoldEater extends Command {
         protected void execute() {
         	if(ballEater.haveBall()){
         		ballEater.hold();
-        		cameraController.forward();
         	}else{
         		ballEater.stop();
         	}

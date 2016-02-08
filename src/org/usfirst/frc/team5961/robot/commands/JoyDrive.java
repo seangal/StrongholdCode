@@ -2,7 +2,6 @@ package org.usfirst.frc.team5961.robot.commands;
 
 import static org.usfirst.frc.team5961.robot.Robot.driveTrain;
 import static org.usfirst.frc.team5961.robot.Robot.oi;
-import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

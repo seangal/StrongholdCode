@@ -18,6 +18,7 @@ public class CameraController extends Subsystem {
     int sessionfront;
     int sessionball;
     Image frame;
+    Image frameEffects;
     CameraServer server;
 	
 	public CameraController(String cam0,String cam1) {
@@ -42,8 +43,15 @@ public class CameraController extends Subsystem {
         setDefaultCommand(new Capture());
     }
     public void grab(){
-    	NIVision.IMAQdxGrab(currSession, frame, 1);
-    	CameraServer.getInstance().setImage(frame);
+    	NIVision.IMAQdxGrab(currSession, frame, 1); // save picture in frame
+    	if(currSession==sessionball){ // if ball camera
+    		NIVision.imaqFlip(frameEffects, frame, NIVision.FlipAxis.CENTER_AXIS); // הופך את התמונה בשני הצירים
+    		//מסרטט
+    	}else{
+    		frameEffects = frame;
+    		//מסרטט
+    	}
+    	CameraServer.getInstance().setImage(frameEffects); // show final image
     }
 }
 

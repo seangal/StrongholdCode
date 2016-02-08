@@ -1,10 +1,12 @@
 package org.usfirst.frc.team5961.robot;
 
 import static org.usfirst.frc.team5961.robot.Robot.oi;
+import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 
-import org.usfirst.frc.team5961.robot.commands.Eat;
+import org.usfirst.frc.team5961.robot.commands.EatOrShoot;
 import org.usfirst.frc.team5961.robot.commands.StopAndHoldEater;
-import org.usfirst.frc.team5961.robot.commands.ThrowBall;
+import org.usfirst.frc.team5961.robot.commands.eEat;
+import org.usfirst.frc.team5961.robot.commands.eThrow;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -17,17 +19,34 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OI {
 	Joystick driverJoystick = new Joystick(0);
-	final int eatPort = 2;
-	final int throwPort = 1;
+	
 	public OI(){
-		Button eatButton = new JoystickButton(driverJoystick,eatPort);
-		Button throwButton = new JoystickButton(driverJoystick,throwPort);
-		Button stopButton = new JoystickButton(driverJoystick, 3);
-		stopButton.whenPressed(new StopAndHoldEater());
-		eatButton.whenPressed(new Eat());
-		throwButton.whileHeld(new ThrowBall());
+		Button eatButton = new JoystickButton(driverJoystick,OIMap.eatOrShootPort);
+		Button eStopRollerButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
+		Button eEatButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
+		Button eThrowButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
+		Button forwardCamButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
+		Button ballCamButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
+		
+		eatButton.whileHeld(new EatOrShoot());
+		//eButtons
+		eStopRollerButton.whenPressed(new StopAndHoldEater());
+		eEatButton.whileHeld(new eEat());
+		eThrowButton.whileHeld(new eThrow());
+		
+		//camera buttons
+		forwardCamButton.whenPressed(forward());
+		ballCamButton.whenPressed(ball());
 	}
 	
+	private Command forward() {
+		cameraController.forward();
+		return null;
+	}
+	private Command ball() {
+		cameraController.ball_cam();
+		return null;
+	}
 	public double getDriverY() {
 		return driverJoystick.getY();
 	}
