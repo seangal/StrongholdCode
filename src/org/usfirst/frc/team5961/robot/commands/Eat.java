@@ -2,6 +2,7 @@ package org.usfirst.frc.team5961.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import static org.usfirst.frc.team5961.robot.Robot.ballEater;
+import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 /**
  *
  */
@@ -20,6 +21,7 @@ public class Eat extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	ballEater.eatBall();
+    	cameraController.ball_cam();
     }
 
     // Make this return true when this Command no longer needs to run execute()

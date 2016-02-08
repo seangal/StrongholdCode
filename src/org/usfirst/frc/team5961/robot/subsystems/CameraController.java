@@ -16,14 +16,14 @@ public class CameraController extends Subsystem {
 
     int currSession;
     int sessionfront;
-    int sessionback;
+    int sessionball;
     Image frame;
     CameraServer server;
 	
 	public CameraController(String cam0,String cam1) {
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-    	sessionfront = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-    	//sessionback = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+    	sessionfront = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+    	sessionball = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
     	currSession = sessionfront;
     	NIVision.IMAQdxConfigureGrab(currSession);
     }
@@ -32,9 +32,9 @@ public class CameraController extends Subsystem {
 	    currSession = sessionfront;
         NIVision.IMAQdxConfigureGrab(currSession);
 	}
-	public void back(){
+	public void ball_cam(){
 		NIVision.IMAQdxStopAcquisition(currSession);
-	    currSession = sessionback;
+	    currSession = sessionball;
         NIVision.IMAQdxConfigureGrab(currSession);
 	}
     public void initDefaultCommand() {

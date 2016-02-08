@@ -28,11 +28,6 @@ public class JoyDrive extends Command {
     	double r = oi.getDriverR();
     	double l = oi.getDriverL();
     	driveTrain.drive(r,l);
-    	if(r+l>=0){
-    		cameraController.forward();
-    	}else{
-    		//cameraController.back();
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
