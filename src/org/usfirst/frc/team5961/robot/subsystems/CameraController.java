@@ -44,9 +44,9 @@ public class CameraController extends Subsystem {
     }
     public void grab(){
     	NIVision.IMAQdxGrab(currSession, frame, 1); // save picture in frame
+    	frameEffects=frame;
     	if(currSession==sessionball){ // if ball camera
-    		NIVision.imaqFlip(frameEffects, frame, NIVision.FlipAxis.CENTER_AXIS); // הופך את התמונה בשני הצירים
-    		//מסרטט
+    		//NIVision.imaqFlip(frameEffects, frame, NIVision.FlipAxis.CENTER_AXIS);
     	}else{
     		frameEffects = drawPrespectiveAimLinesOnFrontCam(frame);
     	}
@@ -54,7 +54,7 @@ public class CameraController extends Subsystem {
     }
     
     public Image drawPrespectiveAimLinesOnFrontCam(Image frame){
-    	NIVision.imaqDrawLineOnImage(frameEffects, frame, NIVision.DrawMode.PAINT_VALUE, new NIVision.Point(1,1), new NIVision.Point(100,100), 1);
+    	//NIVision.imaqDrawLineOnImage(frameEffects, frame, NIVision.DrawMode.PAINT_VALUE, new NIVision.Point(1,1), new NIVision.Point(100,100), 1);
     	return frameEffects;
     }
 }

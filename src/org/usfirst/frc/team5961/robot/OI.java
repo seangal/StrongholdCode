@@ -3,7 +3,7 @@ package org.usfirst.frc.team5961.robot;
 import static org.usfirst.frc.team5961.robot.Robot.oi;
 import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 
-import org.usfirst.frc.team5961.robot.commands.EatOrShoot;
+import org.usfirst.frc.team5961.robot.commands.Eat;
 import org.usfirst.frc.team5961.robot.commands.StopAndHoldEater;
 import org.usfirst.frc.team5961.robot.commands.eEat;
 import org.usfirst.frc.team5961.robot.commands.eThrow;
@@ -21,18 +21,19 @@ public class OI {
 	Joystick driverJoystick = new Joystick(0);
 	
 	public OI(){
-		Button eatButton = new JoystickButton(driverJoystick,OIMap.eatOrShootPort);
+		Button eatButton = new JoystickButton(driverJoystick,OIMap.eatPort);
+		Button shootButton = new JoystickButton(driverJoystick,OIMap.throwPort);
 		Button eStopRollerButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
 		Button eEatButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
-		Button eThrowButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
+		
 		Button forwardCamButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
 		Button ballCamButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
 		
-		eatButton.whileHeld(new EatOrShoot());
+		eatButton.whileHeld(new Eat());
+		shootButton.whileHeld(new eThrow());
 		//eButtons
 		eStopRollerButton.whenPressed(new StopAndHoldEater());
 		eEatButton.whileHeld(new eEat());
-		eThrowButton.whileHeld(new eThrow());
 		
 		//camera buttons
 		forwardCamButton.whenPressed(forward());
