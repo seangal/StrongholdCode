@@ -4,9 +4,14 @@ import static org.usfirst.frc.team5961.robot.Robot.oi;
 import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 
 import org.usfirst.frc.team5961.robot.commands.Eat;
+import org.usfirst.frc.team5961.robot.commands.EatOrShoot;
+import org.usfirst.frc.team5961.robot.commands.Forward;
+import org.usfirst.frc.team5961.robot.commands.JoyDrive;
 import org.usfirst.frc.team5961.robot.commands.StopAndHoldEater;
+import org.usfirst.frc.team5961.robot.commands.ToggelSpeed;
 import org.usfirst.frc.team5961.robot.commands.eEat;
 import org.usfirst.frc.team5961.robot.commands.eThrow;
+import org.usfirst.frc.team5961.robot.triggers.POV;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,34 +24,21 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OI {
 	Joystick driverJoystick = new Joystick(0);
-	
+	public Boolean full=false;
 	public OI(){
 		Button eatButton = new JoystickButton(driverJoystick,OIMap.eatPort);
 		Button shootButton = new JoystickButton(driverJoystick,OIMap.throwPort);
 		Button eStopRollerButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
 		Button eEatButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
 		
-		Button forwardCamButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
-		Button ballCamButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
-		
-		eatButton.whileHeld(new Eat());
-		shootButton.whileHeld(new eThrow());
+		new JoystickButton(driverJoystick, 8).whileActive(new Forward(1,1));
+		eatButton.whenPressed(new ToggelSpeed());
+		shootButton.whileHeld(new EatOrShoot());
 		//eButtons
 		eStopRollerButton.whenPressed(new StopAndHoldEater());
 		eEatButton.whileHeld(new eEat());
 		
-		//camera buttons
-		forwardCamButton.whenPressed(forward());
-		ballCamButton.whenPressed(ball());
-	}
-	
-	private Command forward() {
-		cameraController.forward();
-		return null;
-	}
-	private Command ball() {
-		cameraController.ball_cam();
-		return null;
+		
 	}
 	public double getDriverY() {
 		return driverJoystick.getY();
@@ -55,21 +47,46 @@ public class OI {
 		return driverJoystick.getZ();
 	}
 	public double getDriverR(){
-		double r = (-oi.getDriverY() + oi.getDriverX())*RobotMap.maxSpeed;
-		if (r>RobotMap.maxSpeed){
-			return RobotMap.maxSpeed;
+		if (full){
+			double r = (-oi.getDriverY() + oi.getDriverX());
+			if (r>1){
+				return 1;
+			}else{
+				return r;
+			}
 		}else{
-			return r;
+			double r = (-oi.getDriverY() + oi.getDriverX())*RobotMap.maxSpeed;
+			if (r>RobotMap.maxSpeed){
+				return RobotMap.maxSpeed;
+			}else{
+				return r;
+			}
 		}
 		
 	}
 	public double getDriverL(){
-		double l = (-oi.getDriverY() - oi.getDriverX())*RobotMap.maxSpeed;
-		if (l>RobotMap.maxSpeed){
-			return RobotMap.maxSpeed;
+		if (full){
+			double r = (-oi.getDriverY() - oi.getDriverX());
+			if (r>1){
+				return 1;
+			}else{
+				return r;
+			}
 		}else{
-			return l;
+			double r = (-oi.getDriverY() - oi.getDriverX())*RobotMap.maxSpeed;
+			if (r>RobotMap.maxSpeed){
+				return RobotMap.maxSpeed;
+			}else{
+				return r;
+			}
 		}
 	}
+
+	public boolean isPOVUp() {
+		// TODO Auto-generated method stub
+		return driverJoystick.getPOV()==1;
+	}
+	
+	
 }
 
