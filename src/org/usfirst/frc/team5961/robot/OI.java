@@ -1,12 +1,8 @@
 package org.usfirst.frc.team5961.robot;
 
 import static org.usfirst.frc.team5961.robot.Robot.oi;
-import static org.usfirst.frc.team5961.robot.Robot.cameraController;
-
 import org.usfirst.frc.team5961.robot.commands.Eat;
-import org.usfirst.frc.team5961.robot.commands.EatOrShoot;
 import org.usfirst.frc.team5961.robot.commands.Forward;
-import org.usfirst.frc.team5961.robot.commands.JoyDrive;
 import org.usfirst.frc.team5961.robot.commands.StopAndHoldEater;
 import org.usfirst.frc.team5961.robot.commands.ToggelSpeed;
 import org.usfirst.frc.team5961.robot.commands.eEat;
@@ -16,7 +12,7 @@ import org.usfirst.frc.team5961.robot.triggers.POV;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -29,22 +25,27 @@ public class OI {
 		Button eatButton = new JoystickButton(driverJoystick,OIMap.eatPort);
 		Button shootButton = new JoystickButton(driverJoystick,OIMap.throwPort);
 		Button eStopRollerButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
-		Button eEatButton = new JoystickButton(driverJoystick, OIMap.eStopRoller);
-		
-		new JoystickButton(driverJoystick, 8).whileActive(new Forward(1,1));
-		eatButton.whenPressed(new ToggelSpeed());
-		shootButton.whileHeld(new EatOrShoot());
+		Button eEatButton = new JoystickButton(driverJoystick, OIMap.eEat);
+		Button turboButton = new JoystickButton(driverJoystick, OIMap.turboPort);
+		Trigger povUp=new POV(driverJoystick,0);
+		Trigger povDown=new POV(driverJoystick,180);
+		//Basic Buttons
+		eatButton.whenPressed(new Eat());
+		shootButton.whileHeld(new eThrow());
+		//Turbo Button
+		turboButton.whenPressed(new ToggelSpeed());
 		//eButtons
 		eStopRollerButton.whenPressed(new StopAndHoldEater());
 		eEatButton.whileHeld(new eEat());
-		
-		
+		//POV
+		povUp.whileActive(new Forward(0.5,1));
+		povDown.whileActive(new Forward(-0.5,1));
 	}
 	public double getDriverY() {
 		return driverJoystick.getY();
 	}
 	public double getDriverX() {
-		return driverJoystick.getZ();
+		return driverJoystick.getZ()*RobotMap.rotateSpeed;
 	}
 	public double getDriverR(){
 		if (full){
@@ -80,11 +81,6 @@ public class OI {
 				return r;
 			}
 		}
-	}
-
-	public boolean isPOVUp() {
-		// TODO Auto-generated method stub
-		return driverJoystick.getPOV()==1;
 	}
 	
 	

@@ -20,13 +20,13 @@ public class BallEater extends Subsystem {
     	this.limit = new DigitalInput(limitPort);
     }
 	public void eatBall(){
-		victor.set(SmartDashboard.getNumber("eatSpeed",RobotMap.eatSpeed));
+		victor.set(-SmartDashboard.getNumber("eatSpeed",RobotMap.eatSpeed));
 	}
 	public void throwBall(){
-		victor.set(-SmartDashboard.getNumber("throwSpeed",RobotMap.throwSpeed));
+		victor.set(SmartDashboard.getNumber("throwSpeed",RobotMap.throwSpeed));
 	}
 	public void hold(){
-		victor.set(SmartDashboard.getNumber("holdSpeed",RobotMap.holdSpeed));
+		victor.set(-SmartDashboard.getNumber("holdSpeed",RobotMap.holdSpeed));
 	}
 	public void stop(){
 		victor.set(0);

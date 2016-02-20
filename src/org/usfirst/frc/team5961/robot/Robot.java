@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team5961.robot;
 
-import org.usfirst.frc.team5961.robot.commands.JoyDrive;
+import org.usfirst.frc.team5961.robot.commands.Auto;
 import org.usfirst.frc.team5961.robot.subsystems.BallEater;
 import org.usfirst.frc.team5961.robot.subsystems.CameraController;
 import org.usfirst.frc.team5961.robot.subsystems.DriveTrain;
@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -27,26 +26,18 @@ public class Robot extends IterativeRobot {
 	static public final BallEater ballEater = new BallEater(RobotMap.ballVictor,RobotMap.limitPort);
 	static public final CameraController cameraController = new CameraController("cam0", "cam1");
     Command autonomousCommand;
-    SendableChooser chooser;
+    
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	try{
 		oi = new OI();
-        chooser = new SendableChooser();
-        chooser.addObject("Drive", new JoyDrive());
-        
-        SmartDashboard.putData("Auto mode", chooser);
+        SmartDashboard.putBoolean("Is in front of the LOW BAR/CUBES???", false);
         SmartDashboard.putNumber("eatSpeed", RobotMap.eatSpeed);
     	SmartDashboard.putNumber("throwSpeed", RobotMap.throwSpeed);
     	SmartDashboard.putNumber("holdSpeed",RobotMap.holdSpeed);
-    	SmartDashboard.putBoolean("init worked", true);
-    }catch(Exception  e){
-    	SmartDashboard.putBoolean("init worked", false);
-    }
     }
 	
 	/**
@@ -72,18 +63,8 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
         
-		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "Drive":
-			autonomousCommand = new JoyDrive();
-			break;
-		default:
-			autonomousCommand = new JoyDrive();
-			break;
-		}
-    	
+    	autonomousCommand = new Auto(SmartDashboard.getBoolean("Is in front of the LOW BAR/CUBES???"));
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }

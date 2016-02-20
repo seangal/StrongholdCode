@@ -1,14 +1,20 @@
 package org.usfirst.frc.team5961.robot.triggers;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Trigger;
-import static org.usfirst.frc.team5961.robot.Robot.oi;
 /**
  *
  */
 public class POV extends Trigger {
     
-    public boolean get() {
-        //return oi.isPOVUp();
-    	return false;
-    }
+	Joystick joystick;
+	int pov;
+
+	public POV(Joystick joystick, int pov){
+		this.joystick = joystick;
+		this.pov = pov;
+	}
+	public boolean get() {
+		return joystick.getPOV() == pov;
+	}
 }
