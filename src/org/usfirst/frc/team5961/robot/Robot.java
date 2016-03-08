@@ -34,10 +34,17 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-        SmartDashboard.putBoolean("Is in front of the LOW BAR/CUBES???", false);
+        SmartDashboard.putString("Auto", "1");
         SmartDashboard.putNumber("eatSpeed", RobotMap.eatSpeed);
     	SmartDashboard.putNumber("throwSpeed", RobotMap.throwSpeed);
     	SmartDashboard.putNumber("holdSpeed",RobotMap.holdSpeed);
+    	SmartDashboard.putNumber("rotateSpeed",RobotMap.rotateSpeed);
+    	
+    	SmartDashboard.putNumber("fTime",4.5);
+    	SmartDashboard.putNumber("sTime",0.5);
+    	SmartDashboard.putNumber("tTime",0.2);
+    	SmartDashboard.putNumber("f4Time",4.5);
+    	SmartDashboard.putNumber("f5Time",4.5);
     }
 	
 	/**
@@ -64,7 +71,7 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
         
-    	autonomousCommand = new Auto(SmartDashboard.getBoolean("Is in front of the LOW BAR/CUBES???"));
+    	autonomousCommand = new Auto(SmartDashboard.getString("Auto"));
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }

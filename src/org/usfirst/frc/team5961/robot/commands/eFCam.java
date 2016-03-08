@@ -1,37 +1,32 @@
 package org.usfirst.frc.team5961.robot.commands;
 
-import static org.usfirst.frc.team5961.robot.Robot.ballEater;
-import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 import edu.wpi.first.wpilibj.command.Command;
-
+import static org.usfirst.frc.team5961.robot.Robot.cameraController;
 /**
  *
  */
-public class Eat extends Command {
+public class eFCam extends Command {
 
-    public Eat() {
+    public eFCam() {
         // Use requires() here to declare subsystem dependencies
-    	requires(ballEater);
+        requires(cameraController);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	cameraController.ball_cam();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	ballEater.eatBall();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return ballEater.haveBall();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	ballEater.hold();
     	cameraController.forward();
     }
 

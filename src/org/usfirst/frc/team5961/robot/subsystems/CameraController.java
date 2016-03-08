@@ -22,6 +22,8 @@ public class CameraController extends Subsystem {
     CameraServer server;
 	
 	public CameraController(String cam0,String cam1) {
+		CameraServer.getInstance().setQuality(50);
+		CameraServer.getInstance().setSize(150);
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
     	sessionfront = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
     	sessionball = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
@@ -45,17 +47,8 @@ public class CameraController extends Subsystem {
     public void grab(){
     	NIVision.IMAQdxGrab(currSession, frame, 1); // save picture in frame
     	frameEffects=frame;
-    	if(currSession==sessionball){ // if ball camera
-    		NIVision.imaqFlip(frameEffects, frame, NIVision.FlipAxis.CENTER_AXIS);
-    	}else{
-    		frameEffects = drawPrespectiveAimLinesOnFrontCam(frame);
-    	}
+    	NIVision.imaqFlip(frameEffects, frame, NIVision.FlipAxis.CENTER_AXIS);
     	CameraServer.getInstance().setImage(frameEffects); // show final image
-    }
-    
-    public Image drawPrespectiveAimLinesOnFrontCam(Image frame){
-    	//NIVision.imaqDrawLineOnImage(frameEffects, frame, NIVision.DrawMode.PAINT_VALUE, new NIVision.Point(1,1), new NIVision.Point(100,100), 1);
-    	return frameEffects;
     }
 }
 

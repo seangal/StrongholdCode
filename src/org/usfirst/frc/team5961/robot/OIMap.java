@@ -8,4 +8,7 @@ public class OIMap {
 	public final static int eStopRoller = 12;
 	
 	public static final int turboPort = 3;
+	
+	public static final int forwardCam = 4;
+	public static final int ballCam = 6;
 }
