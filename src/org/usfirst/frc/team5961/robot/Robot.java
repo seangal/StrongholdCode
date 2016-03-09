@@ -40,11 +40,6 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putNumber("holdSpeed",RobotMap.holdSpeed);
     	SmartDashboard.putNumber("rotateSpeed",RobotMap.rotateSpeed);
     	
-    	SmartDashboard.putNumber("fTime",4.5);
-    	SmartDashboard.putNumber("sTime",0.5);
-    	SmartDashboard.putNumber("tTime",0.2);
-    	SmartDashboard.putNumber("f4Time",4.5);
-    	SmartDashboard.putNumber("f5Time",4.5);
     }
 	
 	/**

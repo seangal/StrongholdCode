@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5961.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -26,18 +27,22 @@ public class Auto extends CommandGroup {
         // arm.
     	if("1".equals(status)){
     		System.out.println("1");
-        	addSequential(new Forward(-0.6,4.5));
+        	addSequential(new Forward(-0.6,2));
+        	addSequential(new Rotate(-0.2,0.3));
+        	addSequential(new Forward(-0.4,1.8));
         	addSequential(new Forward(-0.2,0.5));
         	addSequential(new Forward(0.4,0.2));
         	addSequential(new Rotate(0.35,rotateTime));
-        	addSequential(new Forward(0.4,1));
+        	addSequential(new Forward(0.4,1.5*1.1));
         	addSequential(new ThrowBall());
-        	addSequential(new Forward(-0.4,0.8));
+        	addSequential(new Forward(-0.4,1.3));
         	addSequential(new Rotate(-0.35,rotateTime));
     	}else if("0".equals(status)){
         	addSequential(new Forward(-0.4,0.4));
     	}else if("2".equals(status)){
     		addSequential(new Forward(-0.6,3));
+    	}else if("3".equals(status)){
+    		addSequential(new Forward(0.6,3));
     	}
     }
 }

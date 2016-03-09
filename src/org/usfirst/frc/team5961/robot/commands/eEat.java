@@ -21,7 +21,7 @@ public class eEat extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	ballEater.eatBall();
-    	cameraController.ball_cam();
+    	//cameraController.ball_cam();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,7 +32,7 @@ public class eEat extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	ballEater.hold();
-    	cameraController.forward();
+    	//cameraController.forward();
     }
 
     // Called when another command which requires one or more of the same

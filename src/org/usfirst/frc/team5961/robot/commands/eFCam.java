@@ -27,7 +27,7 @@ public class eFCam extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	cameraController.forward();
+    	//cameraController.forward();
     }
 
     // Called when another command which requires one or more of the same

@@ -29,7 +29,7 @@ public class RobotMap {
 	public static final double rotateSpeed=0.8;
 	
 	public static final double eatSpeed = 0.35;
-	public static final double throwSpeed = 0.6;
+	public static final double throwSpeed = 0.85;
 	public static final double holdSpeed = 0.2;
 	
 	
